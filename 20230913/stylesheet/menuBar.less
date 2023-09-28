@@ -1,0 +1,26 @@
+menu-bar {
+    display: block;
+    background-color: #ff2412;
+
+    .content {
+        display: flex;
+        justify-content: center;
+
+        .item {
+            padding: 10px 30px;
+            color: white;
+            font-weight: bolder;
+            font-size: 20px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #e11200;
+            }
+
+            &.active {
+                color: #444444;
+                background-color: #EFEFEF;
+            }
+        }
+    }
+}

@@ -1,0 +1,181 @@
+#adminContent {
+    background-color: #eff8ff;
+    display: flex;
+}
+
+.sideOptionBar {
+    width: 200px;
+
+    .topOption {
+
+        color: white;
+        font-size: 18px;
+    }
+
+    .option {
+        align-items: center;
+        padding: 10px;
+        background-repeat: repeat-x;
+        background-size: auto 100%;
+        display: flex;
+        gap: 10px;
+        font-weight: bolder;
+        flex-wrap: wrap;
+    }
+
+    .item {
+        cursor: pointer;
+
+        .placeholder, img {
+            width: 20px;
+            height: 20px;
+
+
+        }
+
+        .subOptions {
+            overflow: hidden;
+            transition: .2s;
+            max-height: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+
+            .subOption {
+                overflow: hidden;
+                align-items: center;
+                display: flex;
+                background-color: #eff8ff;
+                padding: 8px 10px;
+                position: relative;
+
+                .placeholder {
+                    margin-right: 10px;
+                }
+
+                &:hover, &.active {
+                    background-color: #3eaee0;
+                    color: white;
+                    box-sizing: border-box;
+                    border-left: 4px solid red;
+                }
+
+                .indicate {
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    background-color: #eff8ff;
+                    right: -5px;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+
+        &.active {
+            .subOptions {
+                max-height: 100vh;
+            }
+        }
+    }
+
+}
+
+.main {
+    flex: 1;
+
+    .pathBar {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        font-size: 14px;
+        background-size: auto 100%;
+        background-repeat: repeat-x;
+
+        .left {
+            display: flex;
+            align-items: center;
+
+            .title {
+                font-weight: bolder;
+                margin-right: 10px;
+            }
+
+            .path {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .time {
+            gap: 5px;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .inputBar {
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
+
+        .left {
+            gap: 10px;
+            align-items: center;
+            display: flex;
+
+            .dropdownMenu {
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                background: white;
+                padding: 0 10px;
+                height: 40px;
+                line-height: 40px;
+                border: 1px solid #999999;
+            }
+
+            input {
+                padding: 0 10px;
+                height: 40px;
+                line-height: 40px;
+                border: 1px solid #999999;
+            }
+
+            .button {
+                height: 40px;
+                line-height: 40px;
+                padding: 0 30px;
+                color: white;
+                border-radius: 4px;
+                background-size: auto 100%;
+            }
+        }
+
+        .right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+            .button {
+                font-size: 14px;
+                display: flex;
+                gap: 5px;
+                height: 40px;
+                align-items: center;
+                padding: 0 10px;
+                border: 1px solid #cccccc;
+                background-color: #f1f1f1;
+                border-radius: 4px;
+                background-size: auto 100%;
+
+                img {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+        }
+
+    }
+}

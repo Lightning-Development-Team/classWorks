@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>玩具测试 - register</title>
+    <link rel="stylesheet" type="text/less" href="../stylesheet/register.less">
+    <style>
+        body {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<top-bar custom></top-bar>
+<menu-bar custom active="20"></menu-bar>
+<div id="registrationContent">
+    <div class="main">
+        <div class="inputArea" id="inputArea">
+            <div class="title">用户注册</div>
+            <label class="item">
+                <span>用户名</span>
+                <input key="nickname" type="text">
+            </label>
+            <label class="item">
+                <span>邮箱地址</span>
+                <input key="email" type="text" placeholder="请输入用户名">
+            </label>
+            <label class="item">
+                <span>设置密码</span>
+                <input key="password" type="password" placeholder="请输入邮箱地址">
+            </label>
+            <div class="item">
+                <span></span>
+                <div class="text">6-20个字符，由字母、数字和符号的两种以上组合。</div>
+            </div>
+            <label class="item">
+                <span>确认密码</span>
+                <input key="password-2" type="password">
+            </label>
+            <label class="item">
+                <span>真实姓名</span>
+                <input type="text" key="name" placeholder="请输入真实姓名">
+            </label>
+            <div class="item radio" key="gender" radio select="0">
+                <span>真实姓名</span>
+                <div class="option" option>
+                    <div class="dot active"></div>
+                    <div class="text">男</div>
+                </div>
+                <div class="option" option>
+                    <div class="dot"></div>
+                    <div class="text">女</div>
+                </div>
+            </div>
+            <label class="item">
+                <span>上传头像</span>
+                <input key="avatar" type="file" placeholder="请输入真实姓名">
+            </label>
+            <label class="item">
+                <span>你的手机</span>
+                <input key="tel" type="tel" placeholder="请输入您的手机号">
+            </label>
+            <label class="item">
+                <span>单位名称</span>
+                <input key="company" type="text" placeholder="请输入单位名称">
+            </label>
+            <label class="item">
+                <span></span>
+                <input key="street" type="text" placeholder="请输入街道地址">
+            </label>
+            <div class="item radio" key="multiple" multiple select="">
+                <span>你的爱好</span>
+                <div class="option" option>
+                    <div class="dot"></div>
+                    <div class="text">购物</div>
+                </div>
+                <div class="option" option>
+                    <div class="dot"></div>
+                    <div class="text">餐饮</div>
+                </div>
+                <div class="option" option>
+                    <div class="dot"></div>
+                    <div class="text">影视</div>
+                </div>
+            </div>
+            <label class="item">
+                <span>备注内容</span>
+                <textarea key="remark"></textarea>
+            </label>
+            <div class="buttonArea item">
+                <span>操作</span>
+                <div class="submit" onclick="submit()">
+                    提交
+                </div>
+                <div class="reset" onclick="reset()">
+                    清空
+                </div>
+            </div>
+
+        </div>
+        <img src="../images/register/zhuce_pic.jpg" alt="">
+        <div class="adArea">
+            <img src="../images/register/movie.jpg" alt="">
+            <img src="../images/register/food.jpg" alt="">
+            <img src="../images/register/shop.jpg" alt="">
+        </div>
+    </div>
+</div>
+<footer-area custom></footer-area>
+</body>
+<script src="../js/defineCustomElement.js"></script>
+<script>
+    let inputArea = document.querySelector("#inputArea")
+    let inputElements = () => inputArea.querySelectorAll("input,textarea")
+    let inputData = {}
+
+    function submit() {
+        for (let elementNodeListOfElement of inputElements()) {
+            inputData[elementNodeListOfElement.getAttribute("key")] = elementNodeListOfElement.value
+        }
+        console.log(inputData)
+    }
+
+    function reset() {
+        for (let elementNodeListOfElement of inputElements()) {
+            elementNodeListOfElement.value = ""
+        }
+    }
+</script>
+</html>

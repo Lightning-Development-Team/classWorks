@@ -1,0 +1,44 @@
+top-bar {
+    .bar {
+        > .content {
+            margin: 0 auto;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .left, .right {
+            display: flex;
+            gap: 10px;
+        }
+    }
+
+    .bar.small {
+        background-color: #f1f1f1;
+        padding: 10px;
+        font-size: 14px;
+        color: #444;
+
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            &.customLink {
+                color: #ff6b2d;
+            }
+        }
+
+    }
+
+    .bar.banner {
+        background-color: #fff;
+        padding: 4px 0;
+        height: 90px;
+    }
+
+    #bannerBar .content {
+        height: 100%;
+    }
+}

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>玩具测试 - index</title>
+    <link rel="stylesheet" type="text/less" href="./stylesheet/index.less">
+    <style>
+        body {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<top-bar custom></top-bar>
+<menu-bar custom></menu-bar>
+<div id="indexContent" class="content">
+    <img src="./images/index/ad1.jpg" class="link" alt="">
+    <div class="titleBar orange">
+        最新上架
+    </div>
+    <div class="newGoods flex">
+        <div class="item link" for dataListKey="newGoods" addNumber="1">
+            <img src="./images/index/yifu${index}.jpg" alt="">
+            <div class="info">
+                <div class="flex">
+                    <div class="price">&yen;${price}元</div>
+                    <div class="buyerCount">${buyerCount}人购买</div>
+                </div>
+                <div class="title">${title}</div>
+            </div>
+        </div>
+    </div>
+    <div class="firstAdImages">
+        <img src="./images/index/pic${index}.jpg" class="link" number for="4" start="1" alt="">
+    </div>
+    <div class="titleBar green">
+        影院热映
+    </div>
+    <div class="hotMovies">
+        <div class="left link">
+            <img src="./images/index/ad2.jpg" alt="">
+            <div class="info">
+                <div class="title">《火星救援》首款中文预告</div>
+                <div class="text">马特大蒙火星求生</div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="item link" for dataListKey="hotMovies" addNumber="4">
+                <img src="./images/index/mo${index}.jpg" alt="">
+                <div class="info">
+                    <div class="title">${title}</div>
+                    <div class="text">${text}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="foods flex">
+        <img class="link" src="./images/index/pic${index}.jpg" alt="" number for="4" start="5">
+    </div>
+    <div class="titleBar deepOrange">
+        今日美食
+    </div>
+    <div class="todayFoods">
+        <div class="item" for dataListKey="todayFoods" addNumber="1">
+            <img src="./images/index/ms${index}.jpg" alt="">
+            <div class="title">${title}</div>
+            <div class="more">
+                <div class="price">&yen;${price} <span>起</span></div>
+                <div class="buyCount">已售${buyCount}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer-area custom></footer-area>
+</body>
+<script src="./js/defineCustomElement.js"></script>
+</html>

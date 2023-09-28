@@ -1,0 +1,208 @@
+#indexContent.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .titleBar {
+        padding: 10px 20px;
+        font-weight: bolder;
+        color: white;
+
+        &.orange {
+            background-color: #ff8d00;
+        }
+
+        &.green {
+            background-color: #7ac820;
+        }
+
+        &.deepOrange {
+            background-color: #ff7f00;
+        }
+    }
+
+    .newGoods {
+        justify-content: space-evenly;
+        gap: 10px;
+
+        .item {
+            overflow: hidden;
+            width: calc(100% / 7);
+
+            &:hover {
+                .title {
+                    color: black;
+                }
+            }
+        }
+
+        img {
+            transition: .2s;
+            width: 100%;
+            padding: 4px;
+            border: 1px solid #999999;
+            box-sizing: border-box;
+            object-fit: cover;
+        }
+
+        .info {
+            //margin-top: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+
+        .flex {
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            color: red;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .buyerCount {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .title {
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+    }
+
+    .firstAdImages {
+        display: flex;
+        height: 353px;
+
+        img {
+            height: 100%;
+        }
+
+        div {
+            flex: 1;
+        }
+
+        :first-child {
+            flex: unset;
+            width: 50%;
+        }
+    }
+
+    .hotMovies {
+        display: flex;
+        gap: 10px;
+
+        .info {
+            background-color: #f1f1f1;
+            padding: 10px 0;
+            text-align: center;
+
+            .text {
+                font-size: 14px;
+                color: #999999;
+            }
+        }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+
+            img {
+                flex: 1;
+            }
+        }
+
+        .right {
+            display: flex;
+            flex-wrap: wrap;
+            flex: 1;
+            gap: 10px;
+            justify-content: space-between;
+
+            .item {
+                width: calc((100% - 30px) / 4);
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .foods {
+        img {
+            flex: 1;
+            height: 368px;
+
+            &:first-child {
+                flex: unset;
+            }
+        }
+    }
+
+    .todayFoods {
+        padding: 20px 0;
+        margin-bottom: 10px;
+        border: 1px solid #cccccc;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: space-evenly;
+        row-gap: 20px;
+
+        .item {
+            cursor: pointer;
+            flex: 1 1 25%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+
+            img {
+                width: 240px;
+                height: 180px;
+            }
+
+            .title {
+                background-color: #f1f1f1;
+                padding: 10px 0;
+                width: 240px;
+            }
+
+            .more {
+                width: 240px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .price {
+                    font-weight: bolder;
+                    color: red;
+                }
+
+                .buyCount, span {
+                    color: #cccccc;
+                    font-size: 14px;
+                }
+            }
+
+            &:hover {
+                .title {
+                    color: #ff2412;
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,112 @@
+#registrationContent {
+    background-color: #f9f9f9;
+    padding: 10px 0;
+
+    .main {
+        background-color: white;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        > img {
+            flex: unset;
+            width: 40%;
+        }
+
+        .inputArea {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .item {
+                display: flex;
+                align-items: center;
+
+                span {
+                    width: 80px;
+                    display: block;
+                }
+
+
+                input, textarea {
+                    border: 1px solid #ccc;
+                    min-width: 250px;
+                    padding: 10px;
+                    outline: 0;
+                }
+
+                textarea {
+                    min-height: 200px;
+                }
+
+                .text {
+                    color: #999999;
+                }
+            }
+
+            .radio .option {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+
+                .dot {
+                    width: 20px;
+                    height: 20px;
+                    box-sizing: border-box;
+                    border: 2px solid #f1f1f1;
+                    padding: 2px;
+                    cursor: pointer;
+                }
+
+                .dot.active {
+                    background-color: #ff2412;
+                }
+
+                .text {
+                    color: black;
+                    margin-right: 15px;
+                }
+            }
+
+            .title {
+                font-weight: bolder;
+                font-size: 22px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #cccccc;
+            }
+        }
+
+        .buttonArea {
+            display: flex;
+
+            div {
+                margin-right: 20px;
+                padding: 10px 20px;
+                background-color: #ff2412;
+                color: white;
+                cursor: pointer;
+            }
+
+            .submit {
+                background-color: #7ac820;
+            }
+        }
+    }
+
+
+    .adArea {
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+
+
+        img {
+            flex: 1;
+        }
+
+    }
+
+}

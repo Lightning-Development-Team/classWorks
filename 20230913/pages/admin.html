@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>玩具测试 - admin</title>
+    <link rel="stylesheet" type="text/less" href="../stylesheet/admin.less">
+    <style>
+        body {
+            display: none;
+        }
+    </style>
+    <style>
+        .sideOptionBar .option {
+            background-image: url(../images/manageadmin/leftmenubg.gif)
+        }
+
+        .sideOptionBar .topOption {
+            background-image: url(../images/manageadmin/lefttop.gif)
+        }
+
+        .main .pathBar {
+            background-image: url(../images/manageadmin/righttop.gif);
+        }
+
+        .inputBar .left .button{
+            background-image: url(../images/manageadmin/buttonbg.png);
+        }
+        .inputBar .right .button{
+            background-image: url(../images/manageadmin/tbg.png);
+        }
+    </style>
+</head>
+<body>
+<admin-top-bar custom></admin-top-bar>
+<div id="adminContent">
+    <div class="sideOptionBar">
+
+        <div class="topOption option flex verticalCenter">
+            <img src="../images/manageadmin/leftico.png" alt="">
+            <div class="title">
+                功能菜单
+            </div>
+        </div>
+        <div class="item" for dataListKey="sideOptions">
+            <div class="option">
+                <img src="../images/manageadmin/${icon}.png" alt="">
+                <div class="title">${title}</div>
+            </div>
+            <div class="subOptions">
+                <div class="subOption" child from="sideOptions" dataListKey="subOptions">
+                    <div class="placeholder"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="m14 12l-4 4V8l4 4Z"/>
+                    </svg>
+                    <div class="text">${item}</div>
+                    <div class="indicate"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="pathBar">
+            <div class="left">
+                <div class="title">位置:</div>
+                <div class="path">
+                    <div class="text link">
+                        首页
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12.172 12L9.343 9.173l1.415-1.414L15 12l-4.242 4.242l-1.415-1.414L12.172 12Z"/>
+                    </svg>
+                    <div class="text link">
+                        购物后台管理
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12.172 12L9.343 9.173l1.415-1.414L15 12l-4.242 4.242l-1.415-1.414L12.172 12Z"/>
+                    </svg>
+                    <div class="text link">
+                        商品列表
+                    </div>
+                </div>
+            </div>
+            <div class="time">
+                <img src="../images/manageadmin/leftico01.png" alt="">
+                今天是2023年9月14日星期四 12:00
+            </div>
+        </div>
+        <div class="inputBar">
+            <div class="left">
+                <div class="dropdownMenu" dropdownMenu>
+                    <div class="text">商品分类</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="m12 15l-4.243-4.242l1.415-1.414L12 12.172l2.828-2.828l1.415 1.414L12 15.001Z"/>
+                    </svg>
+                </div>
+                <input type="text" placeholder="请输入商品名称">
+                <div class="button">
+                    查询
+                </div>
+            </div>
+            <div class="right">
+                <div class="button"><img src="../images/manageadmin/t01.png" alt="">添加</div>
+                <div class="button"><img src="../images/manageadmin/t02.png" alt="">修改</div>
+                <div class="button"><img src="../images/manageadmin/t03.png" alt="">删除</div>
+                <div class="button"><img src="../images/manageadmin/t04.png" alt="">统计</div>
+                <div class="button"><img src="../images/manageadmin/t05.png" alt="">设置</div>
+            </div>
+        </div>
+        <div class="tableArea">
+            <div class="bottom">
+                <div class="count"></div>
+                <div class="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/defineCustomElement.js"></script>
+<script>
+    function mounted() {
+        console.log("mounted");
+        let currentSideOptions = document.querySelectorAll(".sideOptionBar .item")
+        console.log(currentSideOptions);
+
+        function clearOptionActive() {
+            for (let option of currentSideOptions) {
+                option.classList.remove("active")
+                option.onclick || (option.onclick = function () {
+                    clearOptionActive()
+                    this.classList.add("active")
+                })
+            }
+        }
+
+        function clearSubOptionActive() {
+            for (let subOption of document.querySelectorAll(".subOption")) {
+                subOption.classList.remove("active")
+                subOption.onclick || (subOption.onclick = function () {
+                    clearSubOptionActive()
+                    subOption.classList.add("active")
+                })
+            }
+        }
+
+        clearSubOptionActive()
+        clearOptionActive()
+        currentSideOptions[0].click()
+        currentSideOptions[0].querySelectorAll(".subOption")[1].click()
+    }
+</script>
+</html>

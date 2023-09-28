@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/less" href="../stylesheet/details.less">
+
+</head>
+<body>
+<div class="topArea">
+    <div class="imagArea">
+        <div class="previewWindowMouseMoveView"></div>
+        <div class="previewWindow">
+            <div class="rangeBox"></div>
+            <img src="../images/pic/1.webp" alt="">
+        </div>
+        <div class="previewBigWindow">
+            <img src="../images/pic/1.webp" alt="">
+        </div>
+        <div class="bottomImages">
+            <img class="active" src="../images/pic/1.webp" alt="">
+            <img src="../images/pic/${index}.webp" alt="" for="4" number start="2">
+        </div>
+    </div>
+    <div class="counter">
+        <div class="minus button">-</div>
+        <input type="text" value="1" class="count">
+        <div class="add button">+</div>
+    </div>
+    <div class="slideShowArea">
+        <div class="leftButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="m10.828 12l4.95 4.95l-1.414 1.415L8 12l6.364-6.364l1.414 1.414l-4.95 4.95Z"/>
+            </svg>
+        </div>
+        <div class="content">
+            <img class="left" alt="" src="../images/pic/1.webp"/>
+            <img class="active" alt="" src="../images/pic/2.webp"/>
+            <img class="right" alt="" src="../images/pic/3.webp"/>
+        </div>
+        <div class="rightButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="m13.171 12l-4.95-4.95l1.415-1.413L16 12l-6.364 6.364l-1.414-1.415l4.95-4.95Z"/>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<div class="bottomArea">
+    <div class="tabArea">
+        <div class="tabBar">
+            <div class="item active">详情</div>
+            <div class="item">评价<span>(0)</span></div>
+            <div class="item">常见问题</div>
+            <div class="placeholder"></div>
+        </div>
+        <div class="tabContainer">
+            <div class="container active">
+                1
+            </div>
+            <div class="container">
+                2
+            </div>
+            <div class="container">
+                3
+            </div>
+        </div>
+    </div>
+
+    <div class="rightProducts">
+
+    </div>
+</div>
+
+
+</body>
+
+<script>
+    let $ = (qs) => document.querySelector(qs),
+            $$ = (qs) => document.querySelectorAll(qs),
+            max = 4,
+            input = $(".counter .count"),
+            previousValue
+    const currentCount = () => parseInt(input.value)
+    $(".counter .button.minus").onclick = e => setCountValue("")
+    $(".counter .button.add").onclick = e => setCountValue("add")
+
+    input.onkeydown = e => previousValue = currentCount()
+
+    input.oninput = e => {
+        if (currentCount() > max) {
+            input.value = previousValue
+            alert("超出范围!")
+        }
+        if (!e.data.match(/\d+/g)) {
+            input.value = previousValue
+            alert("非数字!")
+        }
+    }
+
+    function setCountValue(type = "add") {
+        const newValue = currentCount() - (type === "add" ? -1 : 1)
+        if (newValue <= max && newValue > 0)
+            return input.value = newValue
+    }
+</script>
+<script>
+    const imagArea = $(".imagArea"),
+            previewWindow = $(".imagArea .previewWindow"),
+            previewWindowMouseMoveView = $(".imagArea .previewWindowMouseMoveView"),
+            previewBigWindow = $(".imagArea .previewBigWindow"),
+            bottomImageArea = $(".bottomImages"),
+            bottomImages = e => $$(".bottomImages img"),
+            rangeBox = $(".rangeBox")
+    let slideShowTimer, currentSlideIndex = 0
+    bottomImageArea.onclick = e => {
+        clearActive()
+        e.target.classList.add("active")
+        const targetImg = e.target.getAttribute("src")
+
+        previewBigWindow.querySelector("img").setAttribute("src", targetImg)
+        previewWindow.querySelector("img").setAttribute("src", targetImg)
+    }
+    previewWindowMouseMoveView.onmouseenter = e => {
+        console.log("onmouseenter");
+        previewBigWindow.classList.add("show")
+        rangeBox.classList.add("show")
+        clearInterval(slideShowTimer)
+    }
+    previewWindowMouseMoveView.onmouseleave = e => {
+        console.log("onmouseleave");
+        previewBigWindow.classList.remove("show")
+        rangeBox.classList.remove("show")
+        startTimer()
+    }
+    previewWindowMouseMoveView.onmousemove = e => {
+        const x = e.offsetX,
+                y = e.offsetY,
+                minMoveX = rangeBox.clientWidth / 2,
+                maxMoveX = previewWindow.clientWidth - rangeBox.clientWidth / 2,
+                minMoveY = rangeBox.clientHeight / 2,
+                maxMoveY = previewWindow.clientHeight - rangeBox.clientHeight / 2,
+                previewBigImg = previewBigWindow.querySelector("img")
+        rangeBox.style.left = x + "px"
+        rangeBox.style.top = y + "px"
+
+        if (x < minMoveX)
+            rangeBox.style.left = minMoveX + "px"
+        if (x > maxMoveX)
+            rangeBox.style.left = maxMoveX + "px"
+        if (y < minMoveY)
+            rangeBox.style.top = minMoveY + "px"
+        if (y > maxMoveY)
+            rangeBox.style.top = maxMoveY + "px"
+
+        previewBigImg.style.left = -parseFloat(rangeBox.style.left.replace("px", "")) / previewWindow.clientWidth * 200 + "%"
+        previewBigImg.style.top = -parseFloat(rangeBox.style.top.replace("px", "")) / previewWindow.clientHeight * 200 + "%"
+
+    }
+    startTimer()
+
+    function startTimer() {
+        slideShowTimer = setInterval(() => {
+            timer()
+        }, 3000)
+
+        function timer() {
+            currentSlideIndex++
+            if (currentSlideIndex === bottomImages().length) {
+                currentSlideIndex = 0
+            }
+            bottomImages()[currentSlideIndex].click()
+
+        }
+    }
+
+    function clearActive() {
+        for (let childNode of bottomImageArea.querySelectorAll("img")) childNode.classList.remove("active")
+    }
+</script>
+<script>
+    $$(".tabBar .item").forEach((e, k, l) => e.onclick = function (e) {
+        const containers = $$(".tabContainer .container")
+        containers.forEach(e => e.classList.remove("active"))
+        l.forEach(e => e.classList.remove("active"))
+        this.classList.add("active")
+        containers[k].classList.add("active")
+    })
+</script>
+<script>
+    const slideShows = []
+    const slideShowClassNames = ["left", "active", "right"]
+    const slideShowArea = $(".slideShowArea")
+    const leftButton = $(".slideShowArea .leftButton")
+    const rightButton = $(".slideShowArea .rightButton")
+    leftButton.onclick = e => switchImage(true)
+    rightButton.onclick = e => switchImage()
+    setInterval(() => {
+        switchImage()
+    }, 3000)
+
+    function switchImage(left = false) {
+        const images = slideShowArea.querySelectorAll(".content img")
+        if (left) {
+            let deleteClassName = slideShowClassNames.shift()
+            slideShowClassNames.push(deleteClassName)
+        } else {
+            let deleteClassName = slideShowClassNames.pop()
+            slideShowClassNames.unshift(deleteClassName)
+        }
+        images[0].className = slideShowClassNames[0]
+        images[1].className = slideShowClassNames[1]
+        images[2].className = slideShowClassNames[2]
+    }
+
+</script>
+<script src="../js/defineCustomElement.js"></script>
+</html>

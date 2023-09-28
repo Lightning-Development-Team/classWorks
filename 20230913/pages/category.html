@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>玩具测试 - category</title>
+    <link rel="stylesheet" type="text/less" href="../stylesheet/category.less">
+    <style>
+        body {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<top-bar custom></top-bar>
+<menu-bar custom active="1"></menu-bar>
+<div id="categoryContent" class="content">
+    <div class="sideMenuBar">
+        <div for dataListKey="sideMenuBarItems">
+            <div class="title">${title}</div>
+            <div class="items">
+                <div class="item link" key="${index}" from="sideMenuBarItems" child dataListKey="items">
+                    <div class="dot"></div>
+                    <div class="text">${item}</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12.172 12L9.343 9.173l1.415-1.414L15 12l-4.242 4.242l-1.415-1.414L12.172 12Z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="row">
+            <div class="slideshow">
+                <img class="link" src="../images/shop/index/pic${indexx}.jpg" alt="" number for="3" addNumber="1">
+            </div>
+
+            <div class="column">
+                <div class="notices">
+                    <div class="title">
+                        公告
+                    </div>
+                    <div class="item" for dataListKey="notices">
+                        <div class="dot"></div>
+                        <div class="text link">${item}</div>
+                    </div>
+                </div>
+                <div class="logos">
+                    <img src="../images/shop/index/link${index}.gif" for="4" number alt="" addNumber="1" class="logo link">
+                    <img src="../images/shop/index/link${index}.jpg" for="5" start="5" number alt="" class="logo link">
+                </div>
+            </div>
+        </div>
+
+        <div class="row bottom">
+            <div class="categoryCard" for dataListKey="categoryCardItems" addNumber="1">
+                <div class="top flex">
+                    <img src="../images/shop/index/pro${index}.jpg" alt="" class="icon">
+                    <div class="title">${title}</div>
+                </div>
+                <div class="labels">
+                    <div class="label link" child from="categoryCardItems" dataListKey="labels">${item}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer-area-greater custom></footer-area-greater>
+</body>
+
+<script src="../js/defineCustomElement.js"></script>
+<script>
+    function mounted() {
+        let currentActive = 0
+
+        function switchImage() {
+            let images = document.querySelectorAll(".slideshow img")
+            for (let img of images) {
+                img.classList.remove("active")
+            }
+            images[currentActive].classList.add("active")
+            currentActive++
+            if (currentActive >= images.length)
+                currentActive = 0
+        }
+
+        setInterval(() => {
+            switchImage()
+        }, 4000)
+        switchImage()
+    }
+
+</script>
+</html>

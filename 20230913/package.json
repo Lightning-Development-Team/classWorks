@@ -1,0 +1,10 @@
+{
+  "name": "20230913",
+  "version": "1.0.0",
+  "scripts": {
+    "live": "live-server",
+    "serve": "http-server -c-1"
+  },
+  "author": "梁皓 - nano71.com",
+  "license": "ISC"
+}

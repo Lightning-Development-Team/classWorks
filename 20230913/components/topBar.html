@@ -1,0 +1,33 @@
+<div class="bar small">
+    <div class="content">
+        <div class="left">
+            <div class="item link">
+                <img src="../images/index/star.jpg" alt="">收藏
+            </div>
+            <div class="item">Hi, 欢迎来订购!</div>
+            <a href="../pages/register.html" class="item link customLink">[请登录]</a>
+            <a href="../pages/register.html" class="item link customLink">[免费注册]</a>
+        </div>
+        <div class="right">
+            <a href="../pages/admin.html" class="item link">后台管理<img src="../images/index/arrow.gif" alt=""></a>
+            <div class="item link">网站导航<img src="../images/index/arrow.gif" alt=""></div>
+            <div class="item link"><img src="../images/index/shoppingcart.png" alt="">我的购物车<span style="color: red">9999</span>件<img src="../images/index/arrow.gif" alt=""></div>
+        </div>
+    </div>
+</div>
+<div class="bar banner" id="bannerBar">
+    <div class="content">
+        <img src="../images/index/logo.jpg" alt="" class="logo link">
+        <img src="../images/index/banner.jpg" alt="" id="banner" class="banner">
+    </div>
+</div>
+<script beforeCreate>
+    // template.querySelector("#banner").src = ""
+</script>
+<script mounted>
+    if (pathDot) {
+        document.querySelector("#banner").src = "../images/shop/banner.jpg"
+    }
+</script>
+
+
