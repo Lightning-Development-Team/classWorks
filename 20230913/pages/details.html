@@ -12,14 +12,14 @@
         <div class="previewWindowMouseMoveView"></div>
         <div class="previewWindow">
             <div class="rangeBox"></div>
-            <img src="../images/pic/1.webp" alt="">
+            <img src="/classWorks/20230913/images/pic/1.webp" alt="">
         </div>
         <div class="previewBigWindow">
-            <img src="../images/pic/1.webp" alt="">
+            <img src="/classWorks/20230913/images/pic/1.webp" alt="">
         </div>
         <div class="bottomImages">
-            <img class="active" src="../images/pic/1.webp" alt="">
-            <img src="../images/pic/${index}.webp" alt="" for="4" number start="2">
+            <img class="active" src="/classWorks/20230913/images/pic/1.webp" alt="">
+            <img src="/classWorks/20230913/images/pic/${index}.webp" alt="" for="4" number start="2">
         </div>
     </div>
     <div class="counter">
@@ -34,9 +34,9 @@
             </svg>
         </div>
         <div class="content">
-            <img class="left" alt="" src="../images/pic/1.webp"/>
-            <img class="active" alt="" src="../images/pic/2.webp"/>
-            <img class="right" alt="" src="../images/pic/3.webp"/>
+            <img class="left" alt="" src="/classWorks/20230913/images/pic/1.webp"/>
+            <img class="active" alt="" src="/classWorks/20230913/images/pic/2.webp"/>
+            <img class="right" alt="" src="/classWorks/20230913/images/pic/3.webp"/>
         </div>
         <div class="rightButton">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -76,11 +76,7 @@
 </body>
 
 <script>
-    let $ = (qs) => document.querySelector(qs),
-            $$ = (qs) => document.querySelectorAll(qs),
-            max = 4,
-            input = $(".counter .count"),
-            previousValue
+    let max = 4, input = $(".counter .count"), previousValue
     const currentCount = () => parseInt(input.value)
     $(".counter .button.minus").onclick = e => setCountValue("")
     $(".counter .button.add").onclick = e => setCountValue("add")
