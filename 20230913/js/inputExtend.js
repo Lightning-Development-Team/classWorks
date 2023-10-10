@@ -1,6 +1,5 @@
 {
     let radioAndMultipleList = $$("[radio],[multiple]")
-    console.log(radioAndMultipleList);
     for (const parentElement of radioAndMultipleList) {
         let attributeNames = parentElement.getAttributeNames()
         parentElement.$$ = $$

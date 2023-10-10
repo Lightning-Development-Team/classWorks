@@ -1,6 +1,11 @@
 {
     "name": "classWorks",
     "version": "1.0.0",
+    "scripts": {
+        "live": "",
+        "serve": "serve.bat"
+    },
     "dependencies": {
+        "http-server": "^14.1.1"
     }
 }

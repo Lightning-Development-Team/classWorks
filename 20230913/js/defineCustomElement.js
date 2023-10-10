@@ -14,7 +14,6 @@ function $(selector) {
 }
 
 function $$(selector) {
-    console.log(this);
     return this.querySelectorAll(selector)
 }
 
@@ -33,7 +32,6 @@ window.$$ = selector => document.$$(selector)
     if (window.location.pathname.includes("/pages/")) {
         pathDot = "."
     }
-
     function defineCustomElement(element, elementName) {
         return new Promise(resolve => {
             console.log(elementName);
@@ -53,7 +51,6 @@ window.$$ = selector => document.$$(selector)
             }
             xhr.send();
         })
-
     }
 
     function getCamelCase(str) {
@@ -86,7 +83,7 @@ window.$$ = selector => document.$$(selector)
         createElement("script", {src: pathDot + "./js/less@4.js"})
         createElement("script", {src: pathDot + "./js/inputExtend.js"})
         createElement("script", {src: pathDot + "./js/routerExtend.js"})
-        createElement("script", {src: pathDot + "./js/for.js", type: "module"})
+        createElement("script", {src: pathDot + "./js/forExtend.js", type: "module"})
         createElement("link", {
             href: pathDot + `./global.less`,
             rel: "stylesheet",

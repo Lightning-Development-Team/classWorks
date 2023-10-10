@@ -1,16 +1,21 @@
 <div class="content">
-    <a href="/classWorks/20230913/" class="item active">首页</a>
-    <a href="/classWorks/20230913/pages/category.html" class="item">购物</a>
-    <a href="/classWorks/20230913/pages/category.html" class="item">影城</a>
-    <a href="/classWorks/20230913/pages/category.html" class="item">美食</a>
-    <a href="/classWorks/20230913/pages/category.html" class="item">团购</a>
-    <a href="/classWorks/20230913/pages/category.html" class="item">限时抢购</a>
-    <a href="/classWorks/20230913/pages/category.html" class="item">促销打折</a>
+    <a href="../" class="item active">首页</a>
+    <a href="../pages/category.html" class="item">购物</a>
+    <a href="" class="item">影城</a>
+    <a href="" class="item">美食</a>
+    <a href="" class="item">团购</a>
+    <a href="" class="item">限时抢购</a>
+    <a href="" class="item">促销打折</a>
 </div>
 <script mounted>
     let items = document.$$("menu-bar .content .item")
     for (let item of items) {
         item.classList.remove("active")
     }
-    items[document.$("menu-bar .content").parentElement.getAttribute("active") ?? 0].classList.add("active")
+    try {
+        items[document.$("menu-bar .content").parentElement.getAttribute("active") ?? 0].classList.add("active")
+
+    } catch (e) {
+
+    }
 </script>

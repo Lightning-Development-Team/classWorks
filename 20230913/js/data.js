@@ -1,4 +1,31 @@
 export default {
+    hotList: [
+        {
+            newPrice: 99,
+            oldPrice: 109,
+            name: "纽仕兰新西兰4.0g蛋白全/低脂纯牛奶 24盒"
+        },
+        {
+            newPrice: 33.8,
+            oldPrice: 42,
+            name: "小团圆蛋黄酥礼盒 红豆味 53g*6枚"
+        },
+        {
+            newPrice: 14.9,
+            oldPrice: 19.9,
+            name: "【小刘鸭限定】能除臭的空气浴室香氛"
+        },
+        {
+            newPrice: 15.7,
+            oldPrice: 29.7,
+            name: "可以吃的“薄脆冻干咖啡”，咖啡饼干"
+        },
+        {
+            newPrice: 21.9,
+            oldPrice: 25,
+            name: "≥20%纯牛乳，绵软牛奶云朵吐司 400g"
+        }
+    ],
     newGoods: [
         {
             price: 198,

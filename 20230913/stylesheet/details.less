@@ -1,11 +1,10 @@
 .counter {
     display: flex;
-    height: 40px;
+    height: 30px;
     align-items: center;
     justify-content: center;
     border-radius: 50px;
     overflow: hidden;
-    width: 200px;
     //box-sizing: border-box;
     border: 1px solid #cccccc;
 
@@ -15,10 +14,9 @@
     }
 
     input {
-        width: 1px;
         flex: 1;
         font-weight: bolder;
-        font-size: 18px;
+        font-size: 16px;
         outline: 0;
         padding: 0;
         text-align: center;
@@ -26,14 +24,15 @@
         border-left: 0;
         border-right: 0;
         box-sizing: border-box;
+        width: 60px;
     }
 
     .button {
-        width: 40px;
+        width: 30px;
         cursor: pointer;
         background-color: #f8f8f8;
         text-align: center;
-        line-height: 40px;
+        line-height: 30px;
         font-weight: bolder;
         transition: .2s;
 
@@ -143,6 +142,86 @@
         }
     }
 
+    .detailsArea {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-height: 500px;
+
+        .name {
+            font-weight: bolder;
+            font-size: 20px;
+
+            .subtitle {
+                font-size: 14px;
+                font-weight: normal;
+                color: #999999;
+            }
+        }
+
+
+        .detailsList {
+            padding: 20px;
+            background-color: #f8f8f8;
+            display: flex;
+            gap: 20px;
+
+            .left, .right {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .price {
+                font-weight: bolder;
+                color: red;
+
+                &:before {
+                    content: "¥";
+                    color: red;
+                }
+            }
+        }
+
+        .sizeBox {
+            gap: 20px;
+            display: flex;
+            align-items: center;
+
+            .selects {
+                display: flex;
+                gap: 10px;
+
+                .select {
+                    border: 1px solid #cccccc;
+                    padding: 4px 10px;
+                    font-size: 14px;
+                    cursor: pointer;
+
+                    &.active {
+                        border-color: red;
+                    }
+
+                    &:hover {
+                        border-color: red;
+
+                    }
+                }
+            }
+        }
+
+        .counterBox {
+            gap: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .buttonArea {
+            flex: 1;
+        }
+    }
+
     .slideShowArea {
         width: 100%;
         height: 300px;
@@ -213,6 +292,8 @@
     width: 1200px;
     margin: 0 auto;
     display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
 
     .tabArea {
         flex: 1;
@@ -268,9 +349,10 @@
         .tabContainer {
             border: 1px solid #cccccc;
             border-top: 0;
-            min-height: 200vh;
+            //min-height: 200vh;
 
             .container {
+                box-sizing: border-box;
                 display: none;
 
                 &.active {
@@ -282,6 +364,75 @@
 
 
     .rightProducts {
-        width: 220px;
+        padding-bottom: 20px;
+        width: 320px;
+        border: 1px solid #cccccc;
+
+        .title {
+            background-color: #f8f8f8;
+            padding: 10px 30px 10px;
+            border-bottom: 1px solid #cccccc;
+            text-align: center;
+            font-weight: bolder;
+            margin-bottom: 20px;
+        }
+
+        .items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+
+            .item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+
+                .name {
+                    width: 160px;
+                    font-size: 14px;
+                    text-align: center;
+                }
+
+                .price {
+                    display: flex;
+                    font-size: 14px;
+                    gap: 10px;
+
+                    .new {
+                        color: red;
+                    }
+
+                    .old {
+                        color: #999999;
+                        text-decoration: line-through;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tabContainer .container {
+    > img {
+        width: 100%;
+    }
+
+    &.questions {
+        font-size: 14px;
+
+        .answer {
+            color: #999999;
+        }
+
+        .question {
+            margin-bottom: 10px;
+            margin-top: 30px;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
     }
 }

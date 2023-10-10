@@ -4,29 +4,70 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/less" href="../stylesheet/details.less">
-
+    <style>
+        body {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+<top-bar custom></top-bar>
+<menu-bar custom active="1"></menu-bar>
 <div class="topArea">
     <div class="imagArea">
         <div class="previewWindowMouseMoveView"></div>
         <div class="previewWindow">
             <div class="rangeBox"></div>
-            <img src="/classWorks/20230913/images/pic/1.webp" alt="">
+            <img src="../images/pic/1.webp" alt="">
         </div>
         <div class="previewBigWindow">
-            <img src="/classWorks/20230913/images/pic/1.webp" alt="">
+            <img src="../images/pic/1.webp" alt="">
         </div>
         <div class="bottomImages">
-            <img class="active" src="/classWorks/20230913/images/pic/1.webp" alt="">
-            <img src="/classWorks/20230913/images/pic/${index}.webp" alt="" for="4" number start="2">
+            <img class="active" src="../images/pic/1.webp" alt="">
+            <img src="../images/pic/${index}.webp" alt="" for="4" number start="2">
         </div>
     </div>
-    <div class="counter">
-        <div class="minus button">-</div>
-        <input type="text" value="1" class="count">
-        <div class="add button">+</div>
+    <div class="detailsArea">
+        <div class="name">
+            芒果干118克*6袋
+            <div class="subtitle">
+                厚实绵韧，吃到真芒香
+            </div>
+        </div>
+
+        <div class="detailsList">
+            <div class="left">
+                <div class="label">价格</div>
+                <div class="label">购物返</div>
+                <div class="label">邮费</div>
+                <div class="label">配送</div>
+            </div>
+            <div class="right">
+                <div class="price" id="price">89.9</div>
+                <div class="text">最高返 8积分</div>
+                <div class="text">免邮，合作仓直发</div>
+                <div class="text">16:30前支付, 预计10月12日（星期四）送达</div>
+            </div>
+        </div>
+        <div class="sizeBox">
+            <div class="label">规格</div>
+            <div class="selects">
+                <div class="select active" price="89.99" onclick="changeProduct(this)">118克*6袋</div>
+                <div class="select" price="161.99" onclick="changeProduct(this)">118克*12袋</div>
+            </div>
+        </div>
+        <div class="counterBox">
+            <div class="label">数量</div>
+            <div class="counter">
+                <div class="minus button">-</div>
+                <input type="text" value="1" class="count">
+                <div class="add button">+</div>
+            </div>
+        </div>
+        <div class="buttonArea"></div>
     </div>
+
     <div class="slideShowArea">
         <div class="leftButton">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -34,9 +75,9 @@
             </svg>
         </div>
         <div class="content">
-            <img class="left" alt="" src="/classWorks/20230913/images/pic/1.webp"/>
-            <img class="active" alt="" src="/classWorks/20230913/images/pic/2.webp"/>
-            <img class="right" alt="" src="/classWorks/20230913/images/pic/3.webp"/>
+            <img class="left" alt="" src="../images/details/banner1.jpg"/>
+            <img class="active" alt="" src="../images/details/banner2.jpg"/>
+            <img class="right" alt="" src="../images/details/banner3.jpg"/>
         </div>
         <div class="rightButton">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -50,29 +91,77 @@
     <div class="tabArea">
         <div class="tabBar">
             <div class="item active">详情</div>
-            <div class="item">评价<span>(0)</span></div>
+            <div class="item">评价<span>(1)</span></div>
             <div class="item">常见问题</div>
             <div class="placeholder"></div>
         </div>
         <div class="tabContainer">
             <div class="container active">
-                1
+                <img data-original="https://yanxuan-item.nosdn.127.net/d3d48d7945b6373422fd31f6e7737d94.jpg?type=webp&amp;imageView&amp;quality=90"
+                     class="img-lazyload img-lazyloaded" src="https://yanxuan-item.nosdn.127.net/d3d48d7945b6373422fd31f6e7737d94.jpg?type=webp&amp;imageView&amp;quality=90"
+                     _src="https://yanxuan-item.nosdn.127.net/d3d48d7945b6373422fd31f6e7737d94.jpg">
+                <img data-original="https://yanxuan-item.nosdn.127.net/30613d15961116cd4fbcce1ae8e4d037.jpg?type=webp&amp;imageView&amp;quality=90"
+                     class="img-lazyload img-lazyloaded" src="https://yanxuan-item.nosdn.127.net/30613d15961116cd4fbcce1ae8e4d037.jpg?type=webp&amp;imageView&amp;quality=90"
+                     _src="https://yanxuan-item.nosdn.127.net/30613d15961116cd4fbcce1ae8e4d037.jpg">
+                <img data-original="https://yanxuan-item.nosdn.127.net/e1558105cc13333191989b6ea062aaf3.jpg?type=webp&amp;imageView&amp;quality=90"
+                     class="img-lazyload img-lazyloaded" src="https://yanxuan-item.nosdn.127.net/e1558105cc13333191989b6ea062aaf3.jpg?type=webp&amp;imageView&amp;quality=90"
+                     _src="https://yanxuan-item.nosdn.127.net/e1558105cc13333191989b6ea062aaf3.jpg">
+                <img data-original="https://yanxuan-item.nosdn.127.net/708b0ee87af823222418fe715f7b5331.jpg?type=webp&amp;imageView&amp;quality=90"
+                     class="img-lazyload img-lazyloaded" src="https://yanxuan-item.nosdn.127.net/708b0ee87af823222418fe715f7b5331.jpg?type=webp&amp;imageView&amp;quality=90"
+                     _src="https://yanxuan-item.nosdn.127.net/708b0ee87af823222418fe715f7b5331.jpg">
+                <img data-original="https://yanxuan-item.nosdn.127.net/1bcfedc70f2c0e4b589314b9d359d9d3.jpg?type=webp&amp;imageView&amp;quality=90"
+                     class="img-lazyload img-lazyloaded" src="https://yanxuan-item.nosdn.127.net/1bcfedc70f2c0e4b589314b9d359d9d3.jpg?type=webp&amp;imageView&amp;quality=90"
+                     _src="https://yanxuan-item.nosdn.127.net/1bcfedc70f2c0e4b589314b9d359d9d3.jpg">
             </div>
             <div class="container">
                 2
             </div>
-            <div class="container">
-                3
+            <div class="container p20 questions">
+                <div class="question" data-reactid=".2.1.2.0.1.0.0.0.$issue_0.0">的订单如何配送？</div>
+                <div class="answer" data-reactid=".2.1.2.0.1.0.0.0.$issue_0.1">
+                    会根据商品所在地、顾客所在地和商品的尺寸重量优选物流配送商，确保优质用户体验。目前暂不支持自选快递，具体物流信息可在下单成功后“我的订单-追踪物流”中查看。
+                </div>
+                <div class="question" data-reactid=".2.1.2.0.1.0.0.0.$issue_1.0">如何申请退换货？</div>
+                <div class="answer" data-reactid=".2.1.2.0.1.0.0.0.$issue_1.1">1.支持无忧退换货的商品，自收到商品之日起在无忧退换货期限内，顾客可申请无忧退换货；食品、定作类商品、贴身衣物、积分兑换等特殊商品，无质量问题不支持退换货；<br>2.如果是退货，退款将原路返还，不同的银行处理时间不同，预计1-5个工作日到账；<br>3.退货流程：确认收
+                    货-申请退货-客服审核通过-用户寄回商品-仓库签收验货-退款审核-退款完成；<br>4.换货流程：确认收货-申请换货-客服审核通过-用户寄回商品-仓库签收验货-客服确认-换货完成；<br>5.质量问题和平台问题退换货运费由承担，个人原因退货运费由用户自行承担。上门取件费用由统一与快递服务商结算，顾客只需将退换货商品交给上门取件快递员寄回。如顾客选择自行寄回商品，请先垫付运费，到货验证商品后，严选将以现金券形式为用户报销运费，不接受单方面到付件。
+                </div>
+                <div class="question" data-reactid=".2.1.2.0.1.0.0.0.$issue_2.0">食品类商品什么情况下支持退换货？</div>
+                <div class="answer" data-reactid=".2.1.2.0.1.0.0.0.$issue_2.1">1. 为了维护消费者的权益，出售的食品一经售出非质量原因，不予退货，敬请谅解；<br>2.
+                    生鲜食品及部分酒类产品不支持任何形式的拒签，因客户原因如联系方式有误、电话停机、不接电话、无理由拒收等造成快件无法正常签收的情况，不在赔付范围内；<br>3.
+                    请在签收后，第一时间检查商品。如果商品有腐坏、破损等情况请把商品和快递面单一起拍照并在24小时内联系客服申请理赔，不能提供符合要求的照片或未能在24小时内联系客服，将不予退货退款处理；<br>4.
+                    因喜好不同，要求退货退款者将不予受理。
+                </div>
+                <div class="question" data-reactid=".2.1.2.0.1.0.0.0.$issue_3.0">如何开具发票？</div>
+                <div class="answer" data-reactid=".2.1.2.0.1.0.0.0.$issue_3.1">
+                    1.请在下单时选择“我要开发票”并填写相关信息（APP仅限2.4.0及以上版本）。开具增值税专用发票需在下单时填写增票资质信息。温馨提示：请确保增票资质信息与贵司税务登记证信息一致，避免因开票信息错误给贵司带来损失。
+                    <br>2.可选开票内容：<br> 依照国税总局开票法规，严选订单开具纸质发票、电子发票，开票内容为明细；礼品卡开票内容为预付卡；增值税专用发票开票内容为明细。
+                </div>
+                <div class="question" data-reactid=".2.1.2.0.1.0.0.0.$issue_4.0">关于严选相关价格说明？</div>
+                <div class="answer" data-reactid=".2.1.2.0.1.0.0.0.$issue_4.1">
+                    1.划线价、指导价：商品展示的划线价或指导价可能是商品制造厂商的零售市场指导价、品牌专柜价、商品吊牌价或该商品在严选上曾经展示过的销售价；由于地区、时间的差异性和市场行情波动，品牌专柜标价、商品吊牌价等可能会与您购物时展示的不一致，该价格仅供您参考。<br>2.活动价：如无特殊说明，促销价是商家在划线价、指导价基础上给予的优惠价格。如有疑问，您可以在购买前与客服联系。<br>3.严选价：严选非会员用户购买的商品详情页显示的售价。<br>4.会员价：在严选价的基础上给予不同类型会员用户的优惠价格，仅该类会员用户可以以会员价购买该商品。<br>5.价格异常：因可能存在系统缓存、页面更新延迟等不确定性情况，导致价格显示异常，商品具体售价请以订单结算页价格为准。如您发现异常情况出现，请立即联系我们补正，以便您能顺利购物。
+                </div>
             </div>
         </div>
     </div>
 
     <div class="rightProducts">
+        <div class="title">
+            24小时热销榜
+        </div>
+        <div class="items">
+            <div class="item" for="hotList" addNumber="1">
+                <img src="../images/details/hot${index}.jpg" alt="">
+                <div class="name">${name}</div>
+                <div class="price">
+                    <div class="new">&yen;${newPrice}</div>
+                    <div class="old">&yen;${oldPrice}</div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
-
-
+<footer-area custom></footer-area>
 </body>
 <script src="../js/defineCustomElement.js"></script>
 <script>
@@ -86,18 +175,26 @@
     input.oninput = e => {
         if (currentCount() > max) {
             input.value = previousValue
-            alert("超出范围!")
+            return alert("超出范围!")
         }
         if (!e.data.match(/\d+/g)) {
             input.value = previousValue
-            alert("非数字!")
+            return alert("非数字!")
         }
+        setPrice(input.value)
+    }
+
+    function setPrice(value) {
+        let price = $(".sizeBox .selects .select.active").getAttribute("price")
+        $("#price").innerText = (parseFloat(value) * parseFloat(price)).toFixed(2)
     }
 
     function setCountValue(type = "add") {
         const newValue = currentCount() - (type === "add" ? -1 : 1)
-        if (newValue <= max && newValue > 0)
+        if (newValue <= max && newValue > 0) {
+            setPrice(newValue)
             return input.value = newValue
+        }
     }
 </script>
 <script>
@@ -182,6 +279,14 @@
         this.classList.add("active")
         containers[k].classList.add("active")
     })
+</script>
+<script>
+    function changeProduct(element) {
+        $("#price").innerText = element.getAttribute("price")
+        $$(".sizeBox .selects .select").forEach(element => element.classList.remove("active"))
+        element.classList.add("active")
+        input.value = 1
+    }
 </script>
 <script>
     const slideShows = []

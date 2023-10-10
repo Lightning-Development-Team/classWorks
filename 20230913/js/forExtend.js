@@ -1,7 +1,7 @@
 // @Time : 2023/9/13 14:12
 // @Author : 梁皓 / nano71.com
 // @Email : 1742968988@qq.com
-// @File : for.js
+// @File : forExtend.js
 // @Software: IntelliJ IDEA
 
 import dataList from "./data.js";
@@ -17,16 +17,23 @@ import dataList from "./data.js";
 
     }
 
+    function clearAttribute(element, keys) {
+        for (let key of keys) {
+            element.removeAttribute(key)
+        }
+    }
+
     function loop(useForElement) {
         let markRegExp = /\$\{.+}/g
         let parentElement = useForElement.parentElement
-        let dataListKey = useForElement.getAttribute("dataListKey")
+        let dataListKey = useForElement.getAttribute("for")
         let start = parseInt(useForElement.getAttribute("start") ?? 0)
         let count = parseInt(useForElement.getAttribute("count") ?? 0)
         let addNumber = parseInt(useForElement.getAttribute("addNumber") ?? 0)
         let number = useForElement.getAttribute("number") !== null
+        clearAttribute(useForElement, ["for", "start", "count", "addNumber", "number"])
         if (number) {
-            let forCount = parseInt(useForElement.getAttribute("for") ?? 0)
+            let forCount = parseInt(dataListKey ?? 0)
             for (let i = start; i < forCount + start; i++) {
                 let newElement = createTemporaryElement(useForElement)
                 newElement.innerHTML = useForElement.outerHTML.replace(markRegExp, (i + addNumber).toString())
@@ -34,7 +41,7 @@ import dataList from "./data.js";
             }
         } else {
             if (!dataListKey) {
-                throw SyntaxError("启用了for, 但没有发现dataListKey或number, 在" + useForElement.outerHTML)
+                throw SyntaxError("启用了for, 但没有发现for的Key或number, 在" + useForElement.outerHTML)
             }
             let newElement = createTemporaryElement(useForElement)
             let child = useForElement.querySelector("[child]")
@@ -66,12 +73,12 @@ import dataList from "./data.js";
                 let i = 0
                 for (const element of children) {
                     let realIndex = element.getAttribute("key") ?? i
-                    let dataListChildKey = element.getAttribute("dataListKey")
+                    let dataListChildKey = element.getAttribute("for")
                     if (!dataListChildKey)
-                        throw SyntaxError("启用了child, 但没有发现dataListKey, 在" + element.outerHTML)
+                        throw SyntaxError("启用了child, 但没有发现for的Key, 在" + element.outerHTML)
                     let dataListCache = dataList[dataListKey][realIndex][dataListChildKey]
                     if (!dataListCache)
-                        throw SyntaxError("启用了child, 但dataListKey对应的数据为undefined, 在" + element.outerHTML)
+                        throw SyntaxError("启用了child, 但for的Key对应的数据为undefined, 在" + element.outerHTML)
 
                     for (const data of dataListCache) {
                         let isString = typeof data === "string"

@@ -4,7 +4,7 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="17">
+          <list size="18">
             <item index="0" class="java.lang.String" itemvalue="dataListKey" />
             <item index="1" class="java.lang.String" itemvalue="for" />
             <item index="2" class="java.lang.String" itemvalue="count" />
@@ -22,6 +22,7 @@
             <item index="14" class="java.lang.String" itemvalue="select" />
             <item index="15" class="java.lang.String" itemvalue="option" />
             <item index="16" class="java.lang.String" itemvalue="dropdownMenu" />
+            <item index="17" class="java.lang.String" itemvalue="price" />
           </list>
         </value>
       </option>

@@ -17,10 +17,10 @@
 <menu-bar custom active="1"></menu-bar>
 <div id="categoryContent" class="content">
     <div class="sideMenuBar">
-        <div for dataListKey="sideMenuBarItems">
+        <div for="sideMenuBarItems">
             <div class="title">${title}</div>
             <div class="items">
-                <div class="item link" key="${index}" from="sideMenuBarItems" child dataListKey="items">
+                <div class="item link" key="${index}" from="sideMenuBarItems" child for="items">
                     <div class="dot"></div>
                     <div class="text">${item}</div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -33,7 +33,7 @@
     <div class="main">
         <div class="row">
             <div class="slideshow">
-                <img class="link" src="/classWorks/20230913/images/shop/index/pic${indexx}.jpg" alt="" number for="3" addNumber="1">
+                <img class="link" src="../images/shop/index/pic${indexx}.jpg" alt="" number for="3" addNumber="1">
             </div>
 
             <div class="column">
@@ -41,26 +41,26 @@
                     <div class="title">
                         公告
                     </div>
-                    <div class="item" for dataListKey="notices">
+                    <div class="item" for="notices">
                         <div class="dot"></div>
                         <div class="text link">${item}</div>
                     </div>
                 </div>
                 <div class="logos">
-                    <img src="/classWorks/20230913/images/shop/index/link${index}.gif" for="4" number alt="" addNumber="1" class="logo link">
-                    <img src="/classWorks/20230913/images/shop/index/link${index}.jpg" for="5" start="5" number alt="" class="logo link">
+                    <img src="../images/shop/index/link${index}.gif" for="4" number alt="" addNumber="1" class="logo link">
+                    <img src="../images/shop/index/link${index}.jpg" for="5" start="5" number alt="" class="logo link">
                 </div>
             </div>
         </div>
 
         <div class="row bottom">
-            <div class="categoryCard" for dataListKey="categoryCardItems" addNumber="1">
+            <div class="categoryCard" for="categoryCardItems" addNumber="1">
                 <div class="top flex">
-                    <img src="/classWorks/20230913/images/shop/index/pro${index}.jpg" alt="" class="icon">
+                    <img src="../images/shop/index/pro${index}.jpg" alt="" class="icon">
                     <div class="title">${title}</div>
                 </div>
                 <div class="labels">
-                    <div class="label link" child from="categoryCardItems" dataListKey="labels">${item}</div>
+                    <div class="label link" child from="categoryCardItems" for="labels">${item}</div>
                 </div>
             </div>
         </div>
