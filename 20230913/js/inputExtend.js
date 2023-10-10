@@ -1,8 +1,7 @@
-{
+function useInputExtend(){
     let radioAndMultipleList = $$("[radio],[multiple]")
     for (const parentElement of radioAndMultipleList) {
         let attributeNames = parentElement.getAttributeNames()
-        parentElement.$$ = $$
         let options = parentElement.$$("[option]")
         for (let i in options) {
             options[i].onclick = function () {

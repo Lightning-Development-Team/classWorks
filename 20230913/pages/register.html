@@ -111,6 +111,7 @@
 <footer-area custom></footer-area>
 </body>
 <script src="../js/nplus-lite.js" type="module"></script>
+<script src="../js/inputExtend.js"></script>
 <script>
     let inputArea, inputElements, inputData
 
@@ -118,6 +119,7 @@
         inputArea = $("#inputArea")
         inputElements = () => inputArea.$$("input,textarea")
         inputData = {}
+        useInputExtend()
     }
 
     function submit() {
