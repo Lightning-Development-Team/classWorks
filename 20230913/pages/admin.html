@@ -121,7 +121,7 @@
 <script>
     function mounted() {
         console.log("mounted");
-        let currentSideOptions = document.querySelectorAll(".sideOptionBar .item")
+        let currentSideOptions = $$(".sideOptionBar .item")
         console.log(currentSideOptions);
 
         function clearOptionActive() {
@@ -135,7 +135,7 @@
         }
 
         function clearSubOptionActive() {
-            for (let subOption of document.querySelectorAll(".subOption")) {
+            for (let subOption of $$(".subOption")) {
                 subOption.classList.remove("active")
                 subOption.onclick || (subOption.onclick = function () {
                     clearSubOptionActive()
@@ -147,7 +147,7 @@
         clearSubOptionActive()
         clearOptionActive()
         currentSideOptions[0].click()
-        currentSideOptions[0].querySelectorAll(".subOption")[1].click()
+        currentSideOptions[0].$$(".subOption")[1].click()
     }
 </script>
 </html>

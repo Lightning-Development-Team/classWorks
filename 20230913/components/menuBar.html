@@ -9,12 +9,9 @@
 </div>
 <script mounted>
     let items = $$("menu-bar .content .item")
-    for (let item of items) {
-        item.classList.remove("active")
-    }
+    nplusLite.remoClassNameAll(items, "active")
     try {
         items[document.$("menu-bar .content").parentElement.getAttribute("active") ?? 0].classList.add("active")
-
     } catch (e) {
 
     }
