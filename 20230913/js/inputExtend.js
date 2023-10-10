@@ -23,7 +23,6 @@
                     for (let elementNodeListOfElement of parentElement.$$("[option] .dot")) {
                         elementNodeListOfElement.classList.remove("active")
                     }
-
                     parentElement.setAttribute("select", i)
                     parentElement.$$("[option] .dot")[i].classList.add("active")
                 }

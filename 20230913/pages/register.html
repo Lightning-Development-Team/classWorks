@@ -110,11 +110,15 @@
 </div>
 <footer-area custom></footer-area>
 </body>
-<script src="../js/defineCustomElement.js"></script>
+<script src="../js/nplus-lite.js" type="module"></script>
 <script>
-    let inputArea = document.querySelector("#inputArea")
-    let inputElements = () => inputArea.querySelectorAll("input,textarea")
-    let inputData = {}
+    let inputArea, inputElements, inputData
+
+    function mounted() {
+        inputArea = $("#inputArea")
+        inputElements = () => inputArea.$$("input,textarea")
+        inputData = {}
+    }
 
     function submit() {
         for (let elementNodeListOfElement of inputElements()) {

@@ -8,7 +8,7 @@
     <a href="" class="item">促销打折</a>
 </div>
 <script mounted>
-    let items = document.$$("menu-bar .content .item")
+    let items = $$("menu-bar .content .item")
     for (let item of items) {
         item.classList.remove("active")
     }

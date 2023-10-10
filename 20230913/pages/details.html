@@ -53,8 +53,8 @@
         <div class="sizeBox">
             <div class="label">规格</div>
             <div class="selects">
-                <div class="select active" price="89.99" onclick="changeProduct(this)">118克*6袋</div>
-                <div class="select" price="161.99" onclick="changeProduct(this)">118克*12袋</div>
+                <div class="select active" price="89.99" onclick="changeProductSize(this)">118克*6袋</div>
+                <div class="select" price="161.99" onclick="changeProductSize(this)">118克*12袋</div>
             </div>
         </div>
         <div class="counterBox">
@@ -163,156 +163,160 @@
 </div>
 <footer-area custom></footer-area>
 </body>
-<script src="../js/defineCustomElement.js"></script>
+<script src="../js/nplus-lite.js" type="module"></script>
 <script>
-    let max = 4, input = $(".counter .count"), previousValue
-    const currentCount = () => parseInt(input.value)
-    $(".counter .button.minus").onclick = e => setCountValue("")
-    $(".counter .button.add").onclick = e => setCountValue("add")
+    let max = 4, input, previousValue
 
-    input.onkeydown = e => previousValue = currentCount()
+    function mounted() {
+        counter:{
+            input = $(".counter .count")
+            const currentCount = () => parseInt(input.value)
+            $(".counter .button.minus").onclick = e => setCountValue("")
+            $(".counter .button.add").onclick = e => setCountValue("add")
 
-    input.oninput = e => {
-        if (currentCount() > max) {
-            input.value = previousValue
-            return alert("超出范围!")
+            input.onkeydown = e => previousValue = currentCount()
+
+            input.oninput = e => {
+                if (currentCount() > max) {
+                    input.value = previousValue
+                    return alert("超出范围!")
+                }
+                if (!e.data.match(/\d+/g)) {
+                    input.value = previousValue
+                    return alert("非数字!")
+                }
+                setPrice(input.value)
+            }
+
+            function setCountValue(type = "add") {
+                const newValue = currentCount() - (type === "add" ? -1 : 1)
+                if (newValue <= max && newValue > 0) {
+                    setPrice(newValue)
+                    return input.value = newValue
+                }
+            }
         }
-        if (!e.data.match(/\d+/g)) {
-            input.value = previousValue
-            return alert("非数字!")
+
+        previewWindow:{
+            const previewWindow = $(".imagArea .previewWindow"),
+                    previewWindowMouseMoveView = $(".imagArea .previewWindowMouseMoveView"),
+                    previewBigWindow = $(".imagArea .previewBigWindow"),
+                    bottomImageArea = $(".bottomImages"),
+                    bottomImages = e => $$(".bottomImages img"),
+                    rangeBox = $(".rangeBox")
+            let slideShowTimer, currentSlideIndex = 0
+            bottomImageArea.onclick = e => {
+                nplusLite.remoClassNameAll(bottomImageArea.$$("img"), "active")
+                e.target.classList.add("active")
+                const targetImg = e.target.getAttribute("src")
+
+                previewBigWindow.$("img").setAttribute("src", targetImg)
+                previewWindow.$("img").setAttribute("src", targetImg)
+            }
+            previewWindowMouseMoveView.onmouseenter = e => {
+                console.log("onmouseenter");
+                previewBigWindow.classList.add("show")
+                rangeBox.classList.add("show")
+                clearInterval(slideShowTimer)
+            }
+            previewWindowMouseMoveView.onmouseleave = e => {
+                console.log("onmouseleave");
+                previewBigWindow.classList.remove("show")
+                rangeBox.classList.remove("show")
+                startTimer()
+            }
+            previewWindowMouseMoveView.onmousemove = e => {
+                const x = e.offsetX,
+                        y = e.offsetY,
+                        minMoveX = rangeBox.clientWidth / 2,
+                        maxMoveX = previewWindow.clientWidth - rangeBox.clientWidth / 2,
+                        minMoveY = rangeBox.clientHeight / 2,
+                        maxMoveY = previewWindow.clientHeight - rangeBox.clientHeight / 2,
+                        previewBigImg = previewBigWindow.$("img")
+                rangeBox.style.left = x + "px"
+                rangeBox.style.top = y + "px"
+
+                if (x < minMoveX)
+                    rangeBox.style.left = minMoveX + "px"
+                if (x > maxMoveX)
+                    rangeBox.style.left = maxMoveX + "px"
+                if (y < minMoveY)
+                    rangeBox.style.top = minMoveY + "px"
+                if (y > maxMoveY)
+                    rangeBox.style.top = maxMoveY + "px"
+
+                previewBigImg.style.left = -parseFloat(rangeBox.style.left.replace("px", "")) / previewWindow.clientWidth * 200 + "%"
+                previewBigImg.style.top = -parseFloat(rangeBox.style.top.replace("px", "")) / previewWindow.clientHeight * 200 + "%"
+
+            }
+            startTimer()
+
+            function startTimer() {
+                slideShowTimer = setInterval(() => {
+                    timer()
+                }, 3000)
+
+                function timer() {
+                    currentSlideIndex++
+                    if (currentSlideIndex === bottomImages().length) {
+                        currentSlideIndex = 0
+                    }
+                    bottomImages()[currentSlideIndex].click()
+
+                }
+            }
         }
-        setPrice(input.value)
+
+        tabPlate:{
+            $$(".tabBar .item").forEach((e, k, l) => e.onclick = function (e) {
+                const containers = $$(".tabContainer .container")
+                containers.forEach(e => e.classList.remove("active"))
+                l.forEach(e => e.classList.remove("active"))
+                this.classList.add("active")
+                containers[k].classList.add("active")
+            })
+        }
+
+
+        slideShow:{
+            const slideShowClassNames = ["left", "active", "right"]
+            const slideShowArea = $(".slideShowArea")
+            const leftButton = $(".slideShowArea .leftButton")
+            const rightButton = $(".slideShowArea .rightButton")
+            leftButton.onclick = e => switchImage(true)
+            rightButton.onclick = e => switchImage()
+            setInterval(() => {
+                switchImage()
+            }, 3000)
+
+            function switchImage(left = false) {
+                const images = slideShowArea.$$(".content img")
+                if (left) {
+                    let deleteClassName = slideShowClassNames.shift()
+                    slideShowClassNames.push(deleteClassName)
+                } else {
+                    let deleteClassName = slideShowClassNames.pop()
+                    slideShowClassNames.unshift(deleteClassName)
+                }
+                images[0].className = slideShowClassNames[0]
+                images[1].className = slideShowClassNames[1]
+                images[2].className = slideShowClassNames[2]
+            }
+        }
+
+
+    }
+
+    function changeProductSize(element) {
+        $("#price").innerText = element.getAttribute("price")
+        $$(".sizeBox .selects .select").forEach(element => element.classList.remove("active"))
+        element.classList.add("active")
+        input.value = 1
     }
 
     function setPrice(value) {
         let price = $(".sizeBox .selects .select.active").getAttribute("price")
         $("#price").innerText = (parseFloat(value) * parseFloat(price)).toFixed(2)
     }
-
-    function setCountValue(type = "add") {
-        const newValue = currentCount() - (type === "add" ? -1 : 1)
-        if (newValue <= max && newValue > 0) {
-            setPrice(newValue)
-            return input.value = newValue
-        }
-    }
-</script>
-<script>
-    const imagArea = $(".imagArea"),
-            previewWindow = $(".imagArea .previewWindow"),
-            previewWindowMouseMoveView = $(".imagArea .previewWindowMouseMoveView"),
-            previewBigWindow = $(".imagArea .previewBigWindow"),
-            bottomImageArea = $(".bottomImages"),
-            bottomImages = e => $$(".bottomImages img"),
-            rangeBox = $(".rangeBox")
-    let slideShowTimer, currentSlideIndex = 0
-    bottomImageArea.onclick = e => {
-        clearActive()
-        e.target.classList.add("active")
-        const targetImg = e.target.getAttribute("src")
-
-        previewBigWindow.querySelector("img").setAttribute("src", targetImg)
-        previewWindow.querySelector("img").setAttribute("src", targetImg)
-    }
-    previewWindowMouseMoveView.onmouseenter = e => {
-        console.log("onmouseenter");
-        previewBigWindow.classList.add("show")
-        rangeBox.classList.add("show")
-        clearInterval(slideShowTimer)
-    }
-    previewWindowMouseMoveView.onmouseleave = e => {
-        console.log("onmouseleave");
-        previewBigWindow.classList.remove("show")
-        rangeBox.classList.remove("show")
-        startTimer()
-    }
-    previewWindowMouseMoveView.onmousemove = e => {
-        const x = e.offsetX,
-                y = e.offsetY,
-                minMoveX = rangeBox.clientWidth / 2,
-                maxMoveX = previewWindow.clientWidth - rangeBox.clientWidth / 2,
-                minMoveY = rangeBox.clientHeight / 2,
-                maxMoveY = previewWindow.clientHeight - rangeBox.clientHeight / 2,
-                previewBigImg = previewBigWindow.querySelector("img")
-        rangeBox.style.left = x + "px"
-        rangeBox.style.top = y + "px"
-
-        if (x < minMoveX)
-            rangeBox.style.left = minMoveX + "px"
-        if (x > maxMoveX)
-            rangeBox.style.left = maxMoveX + "px"
-        if (y < minMoveY)
-            rangeBox.style.top = minMoveY + "px"
-        if (y > maxMoveY)
-            rangeBox.style.top = maxMoveY + "px"
-
-        previewBigImg.style.left = -parseFloat(rangeBox.style.left.replace("px", "")) / previewWindow.clientWidth * 200 + "%"
-        previewBigImg.style.top = -parseFloat(rangeBox.style.top.replace("px", "")) / previewWindow.clientHeight * 200 + "%"
-
-    }
-    startTimer()
-
-    function startTimer() {
-        slideShowTimer = setInterval(() => {
-            timer()
-        }, 3000)
-
-        function timer() {
-            currentSlideIndex++
-            if (currentSlideIndex === bottomImages().length) {
-                currentSlideIndex = 0
-            }
-            bottomImages()[currentSlideIndex].click()
-
-        }
-    }
-
-    function clearActive() {
-        for (let childNode of bottomImageArea.querySelectorAll("img")) childNode.classList.remove("active")
-    }
-</script>
-<script>
-    $$(".tabBar .item").forEach((e, k, l) => e.onclick = function (e) {
-        const containers = $$(".tabContainer .container")
-        containers.forEach(e => e.classList.remove("active"))
-        l.forEach(e => e.classList.remove("active"))
-        this.classList.add("active")
-        containers[k].classList.add("active")
-    })
-</script>
-<script>
-    function changeProduct(element) {
-        $("#price").innerText = element.getAttribute("price")
-        $$(".sizeBox .selects .select").forEach(element => element.classList.remove("active"))
-        element.classList.add("active")
-        input.value = 1
-    }
-</script>
-<script>
-    const slideShows = []
-    const slideShowClassNames = ["left", "active", "right"]
-    const slideShowArea = $(".slideShowArea")
-    const leftButton = $(".slideShowArea .leftButton")
-    const rightButton = $(".slideShowArea .rightButton")
-    leftButton.onclick = e => switchImage(true)
-    rightButton.onclick = e => switchImage()
-    setInterval(() => {
-        switchImage()
-    }, 3000)
-
-    function switchImage(left = false) {
-        const images = slideShowArea.querySelectorAll(".content img")
-        if (left) {
-            let deleteClassName = slideShowClassNames.shift()
-            slideShowClassNames.push(deleteClassName)
-        } else {
-            let deleteClassName = slideShowClassNames.pop()
-            slideShowClassNames.unshift(deleteClassName)
-        }
-        images[0].className = slideShowClassNames[0]
-        images[1].className = slideShowClassNames[1]
-        images[2].className = slideShowClassNames[2]
-    }
-
 </script>
 </html>

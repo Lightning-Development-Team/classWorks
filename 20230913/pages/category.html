@@ -69,16 +69,15 @@
 <footer-area-greater custom></footer-area-greater>
 </body>
 
-<script src="../js/defineCustomElement.js"></script>
+<script src="../js/nplus-lite.js" type="module"></script>
 <script>
     function mounted() {
+        console.log("mounted");
         let currentActive = 0
 
         function switchImage() {
-            let images = document.querySelectorAll(".slideshow img")
-            for (let img of images) {
-                img.classList.remove("active")
-            }
+            let images = $$(".slideshow img")
+            nplusLite.remoClassNameAll(images, "active")
             images[currentActive].classList.add("active")
             currentActive++
             if (currentActive >= images.length)
@@ -90,6 +89,5 @@
         }, 4000)
         switchImage()
     }
-
 </script>
 </html>
