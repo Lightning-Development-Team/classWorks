@@ -25,6 +25,7 @@ class NplusLite {
         Document.prototype.$$ = $$
         DocumentFragment.prototype.$$ = $$
         Window.prototype.$$ = selector => document.$$(selector)
+        this.initialization().then(console.log)
     }
 
 
@@ -38,7 +39,25 @@ class NplusLite {
         for (let key in attributes) {
             element.setAttribute(key, attributes[key]);
         }
-        document.$("html").appendChild(element)
+        $("html").appendChild(element)
+    }
+
+    /**
+     * 等待脚本加载完毕
+     * @returns {Promise<void>}
+     */
+    async waitScriptLoad() {
+        async function wait(querySelector) {
+            return new Promise(resolve => {
+                $("html").querySelector(querySelector).onload = function () {
+                    resolve()
+                }
+            })
+        }
+        await Promise.all([
+            wait("script#routerExtend"), wait("script#inputExtend")
+        ])
+        return Promise.resolve()
     }
 
     /**
@@ -61,7 +80,7 @@ class NplusLite {
         return new Promise(resolve => {
             // console.log(elementName);
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', this.pathDot + `./components/${elementName}.html`);
+            xhr.open("GET", this.pathDot + `./components/${elementName}.html`);
             xhr.onload = req => {
                 let content = req.currentTarget.response
                 let template = document.createElement("template")
@@ -204,9 +223,15 @@ class NplusLite {
             rel: "stylesheet",
             type: "text/less"
         })
-        nplusLite.createElement("script", {src: pathDot + "./js/inputExtend.js"})
-        nplusLite.createElement("script", {src: pathDot + "./js/routerExtend.js"})
+        nplusLite.createElement("script", {id: "inputExtend", src: pathDot + "./js/inputExtend.js"})
+        nplusLite.createElement("script", {id: "routerExtend", src: pathDot + "./js/routerExtend.js"})
         nplusLite.createElement("script", {src: pathDot + "./js/less@4.js"})
+        await this.waitScriptLoad()
+        try {
+            mounted()
+        } catch (e) {
+            // console.warn("页面没有定义mounted, 它是可选的");
+        }
         return Promise.resolve("Thanks for using nplus-lite!")
     }
 
@@ -236,11 +261,6 @@ class NplusLite {
         for (let useForElement of useForElements) {
             await this.fillTemplate(useForElement)
         }
-        try {
-            mounted()
-        } catch (e) {
-            // console.warn("页面没有定义mounted, 它是可选的");
-        }
     }
 
     /**
@@ -257,14 +277,14 @@ class NplusLite {
      * @param {string} className
      */
     remoClassNameAll(elements, className) {
-            for (let childNode of elements) {
-                this.remoClassName(childNode, className)
-            }
+        for (let childNode of elements) {
+            this.remoClassName(childNode, className)
+        }
     }
 }
 
 
 window.nplusLite = new NplusLite()
-nplusLite.initialization().then(console.log)
+
 
 
