@@ -68,27 +68,29 @@
 </div>
 <footer-area-greater custom></footer-area-greater>
 </body>
-
-<script src="../js/nplus-lite.js" type="module"></script>
 <script>
-    function mounted() {
-        // useRouterExtend()
-        console.log("mounted");
-        let currentActive = 0
+    nplusLitePage = {
+        mounted() {
+            // useRouterExtend()
+            console.log("mounted");
+            let currentActive = 0
 
-        function switchImage() {
-            let images = $$(".slideshow img")
-            nplusLite.remoClassNameAll(images, "active")
-            images[currentActive].classList.add("active")
-            currentActive++
-            if (currentActive >= images.length)
-                currentActive = 0
-        }
+            function switchImage() {
+                let images = $$(".slideshow img")
+                nplusLite.remoClassNameAll(images, "active")
+                images[currentActive].classList.add("active")
+                currentActive++
+                if (currentActive >= images.length)
+                    currentActive = 0
+            }
 
-        setInterval(() => {
+            setInterval(() => {
+                switchImage()
+            }, 4000)
             switchImage()
-        }, 4000)
-        switchImage()
+        }
     }
+
 </script>
+<script src="../js/nplus-lite.js" type="module"></script>
 </html>

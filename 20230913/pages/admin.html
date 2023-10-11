@@ -117,37 +117,40 @@
     </div>
 </div>
 </body>
-<script src="../js/nplus-lite.js" type="module"></script>
 <script>
-    function mounted() {
-        console.log("mounted");
-        let currentSideOptions = $$(".sideOptionBar .item")
-        console.log(currentSideOptions);
+    nplusLitePage={
+        mounted() {
+            console.log("mounted");
+            let currentSideOptions = $$(".sideOptionBar .item")
+            console.log(currentSideOptions);
 
-        function clearOptionActive() {
-            for (let option of currentSideOptions) {
-                option.classList.remove("active")
-                option.onclick || (option.onclick = function () {
-                    clearOptionActive()
-                    this.classList.add("active")
-                })
+            function clearOptionActive() {
+                for (let option of currentSideOptions) {
+                    option.classList.remove("active")
+                    option.onclick || (option.onclick = function () {
+                        clearOptionActive()
+                        this.classList.add("active")
+                    })
+                }
             }
-        }
 
-        function clearSubOptionActive() {
-            for (let subOption of $$(".subOption")) {
-                subOption.classList.remove("active")
-                subOption.onclick || (subOption.onclick = function () {
-                    clearSubOptionActive()
-                    subOption.classList.add("active")
-                })
+            function clearSubOptionActive() {
+                for (let subOption of $$(".subOption")) {
+                    subOption.classList.remove("active")
+                    subOption.onclick || (subOption.onclick = function () {
+                        clearSubOptionActive()
+                        subOption.classList.add("active")
+                    })
+                }
             }
-        }
 
-        clearSubOptionActive()
-        clearOptionActive()
-        currentSideOptions[0].click()
-        currentSideOptions[0].$$(".subOption")[1].click()
+            clearSubOptionActive()
+            clearOptionActive()
+            currentSideOptions[0].click()
+            currentSideOptions[0].$$(".subOption")[1].click()
+        }
     }
+
 </script>
+<script src="../js/nplus-lite.js" type="module"></script>
 </html>

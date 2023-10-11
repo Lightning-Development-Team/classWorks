@@ -1,4 +1,14 @@
 export default {
+    sizes: [
+        {
+            price: 89.99,
+            size: "118克*6袋"
+        },
+        {
+            price: 169.99,
+            size: "118克*12袋"
+        }
+    ],
     hotList: [
         {
             newPrice: 99,
