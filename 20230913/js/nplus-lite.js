@@ -29,7 +29,7 @@ class NplusLite {
         Document.prototype.$$ = $$
         DocumentFragment.prototype.$$ = $$
         Window.prototype.$$ = selector => document.$$(selector)
-        this.initialization()
+        this.#initialization()
     }
 
     /**
@@ -50,7 +50,7 @@ class NplusLite {
      * @param {string[]} querySelectors
      * @returns {Promise<void>}
      */
-    async waitScriptLoad(querySelectors) {
+    async #waitScriptLoad(querySelectors) {
         async function wait(querySelector) {
             return new Promise(resolve => {
                 $("html").$(querySelector).onload = function () {
@@ -133,7 +133,7 @@ class NplusLite {
      * @param {string} html
      * @param {*} data
      */
-    customReplaceFn(isString, html, data) {
+    #customReplaceFn(isString, html, data) {
         if (isString && html.replace(/\$\{|}/g, "") === "item") {
             return data
         }
@@ -182,7 +182,7 @@ class NplusLite {
 
                 // 无声明index
                 isString || data.index || (data.index = index + addNumber)
-                newElement.innerHTML = useForElement.outerHTML.replace(markRegExp, htmlString => this.customReplaceFn(isString, htmlString, data))
+                newElement.innerHTML = useForElement.outerHTML.replace(markRegExp, htmlString => this.#customReplaceFn(isString, htmlString, data))
                 child && (newElement.$("[child]").innerHTML = childElement)
                 try {
                     parentElement.appendChild(newElement.firstElementChild)
@@ -211,7 +211,7 @@ class NplusLite {
                     for (const data of dataListCache) {
                         let isString = typeof data === "string"
                         let newElement = this.createTemporaryElement(element)
-                        newElement.innerHTML = element.outerHTML.replace(markRegExp, substring => this.customReplaceFn(isString, substring, data))
+                        newElement.innerHTML = element.outerHTML.replace(markRegExp, substring => this.#customReplaceFn(isString, substring, data))
                         newElement = newElement.firstElementChild
                         newElement.removeAttribute("child")
                         element.parentElement.appendChild(newElement)
@@ -230,7 +230,7 @@ class NplusLite {
      * nplus-lite的初始化
      * @returns {Promise<Awaited<string>>}
      */
-    async initialization() {
+    async #initialization() {
         // window.nplusLitePage = {
         //     data: null,
         //     mounted: null
@@ -246,8 +246,15 @@ class NplusLite {
         nplusLite.createElement("script", {id: "inputExtend", src: pathDot + "./js/inputExtend.js"})
         nplusLite.createElement("script", {id: "routerExtend", src: pathDot + "./js/routerExtend.js"})
         nplusLite.createElement("script", {src: pathDot + "./js/less@4.js"})
-        await this.waitScriptLoad(["script#inputExtend", "script#routerExtend"])
+        await this.#waitScriptLoad(["script#inputExtend", "script#routerExtend"])
+        this.#pageDataBind()
+        console.log("%cThanks for using nplus-lite!", "background:#0096ff;color:white;padding:10px");
+    }
 
+    /**
+     * 页面数据绑定和执行页面的mounted函数
+     */
+    #pageDataBind() {
         let bindData = nplusLitePage.data
 
         if (Object.keys(bindData || {}).length) {
@@ -277,7 +284,6 @@ class NplusLite {
         } else {
             console.log("%c页面没有定义mounted(), 它是可选的", "background:#0096ff;color:white;padding:10px");
         }
-        console.log("%cThanks for using nplus-lite!", "background:#0096ff;color:white;padding:10px");
     }
 
     /**
