@@ -247,14 +247,14 @@ class NplusLite {
         nplusLite.createElement("script", {id: "routerExtend", src: pathDot + "./js/routerExtend.js"})
         nplusLite.createElement("script", {src: pathDot + "./js/less@4.js"})
         await this.#waitScriptLoad(["script#inputExtend", "script#routerExtend"])
-        this.#pageDataBind()
+        this.nplusLitePageInitialize()
         console.log("%cThanks for using nplus-lite!", "background:#0096ff;color:white;padding:10px");
     }
 
     /**
      * 页面数据绑定和执行页面的mounted函数
      */
-    #pageDataBind() {
+    nplusLitePageInitialize() {
         let bindData = nplusLitePage.data
 
         if (Object.keys(bindData || {}).length) {
