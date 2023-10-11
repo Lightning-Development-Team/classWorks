@@ -84,7 +84,7 @@ class NplusLite {
      * @param {Element|Node} element
      * @param {string} elementName
      */
-    defineCustomElement(element, elementName) {
+    #defineCustomElement(element, elementName) {
         return new Promise(resolve => {
             // console.log(elementName);
             const xhr = new XMLHttpRequest();
@@ -123,7 +123,7 @@ class NplusLite {
      * @param {Element} element
      * @returns {HTMLElement}
      */
-    createTemporaryElement(element) {
+    #createTemporaryElement(element) {
         return document.createElement(element.tagName.toLowerCase())
     }
 
@@ -144,7 +144,7 @@ class NplusLite {
      * 进行填充模板和数据写入html
      * @param {Element|Node} useForElement
      */
-    async fillTemplate(useForElement) {
+    async #fillTemplate(useForElement) {
         let markRegExp = /\${(.+?)}/g
         let parentElement = useForElement.parentElement
         let dataListKey = useForElement.getAttribute("for")
@@ -156,7 +156,7 @@ class NplusLite {
         if (number) {
             let forCount = parseInt(dataListKey ?? 0)
             for (let i = start; i < forCount + start; i++) {
-                let newElement = this.createTemporaryElement(useForElement)
+                let newElement = this.#createTemporaryElement(useForElement)
                 newElement.innerHTML = useForElement.outerHTML.replace(markRegExp, (i + addNumber).toString())
                 parentElement.appendChild(newElement.firstElementChild)
             }
@@ -164,7 +164,7 @@ class NplusLite {
             if (!dataListKey) {
                 throw SyntaxError("启用了for, 但没有发现for的Key或number, 在" + useForElement.outerHTML)
             }
-            let newElement = this.createTemporaryElement(useForElement)
+            let newElement = this.#createTemporaryElement(useForElement)
             let child = useForElement.$("[child]")
             let childElement = child?.innerHTML
 
@@ -210,7 +210,7 @@ class NplusLite {
 
                     for (const data of dataListCache) {
                         let isString = typeof data === "string"
-                        let newElement = this.createTemporaryElement(element)
+                        let newElement = this.#createTemporaryElement(element)
                         newElement.innerHTML = element.outerHTML.replace(markRegExp, substring => this.#customReplaceFn(isString, substring, data))
                         newElement = newElement.firstElementChild
                         newElement.removeAttribute("child")
@@ -330,7 +330,7 @@ class NplusLite {
                 rel: "stylesheet",
                 type: "text/less"
             })
-            await this.defineCustomElement(customElement, elementNameCache)
+            await this.#defineCustomElement(customElement, elementNameCache)
         }
     }
 
@@ -340,7 +340,7 @@ class NplusLite {
     async elementLoopInitialize() {
         let useForElements = $$("[for]")
         for (let useForElement of useForElements) {
-            await this.fillTemplate(useForElement)
+            await this.#fillTemplate(useForElement)
         }
     }
 
