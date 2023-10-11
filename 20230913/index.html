@@ -77,8 +77,136 @@
 </body>
 <script src="./js/nplus-lite.js" type="module"></script>
 <script>
-    function mounted() {
-        // useRouterExtend()
+    nplusLitePage = {
+        data: {
+            hotList: [
+                {
+                    newPrice: 99,
+                    oldPrice: 109,
+                    name: "纽仕兰新西兰4.0g蛋白全/低脂纯牛奶 24盒"
+                },
+                {
+                    newPrice: 33.8,
+                    oldPrice: 42,
+                    name: "小团圆蛋黄酥礼盒 红豆味 53g*6枚"
+                },
+                {
+                    newPrice: 14.9,
+                    oldPrice: 19.9,
+                    name: "【小刘鸭限定】能除臭的空气浴室香氛"
+                },
+                {
+                    newPrice: 15.7,
+                    oldPrice: 29.7,
+                    name: "可以吃的“薄脆冻干咖啡”，咖啡饼干"
+                },
+                {
+                    newPrice: 21.9,
+                    oldPrice: 25,
+                    name: "≥20%纯牛乳，绵软牛奶云朵吐司 400g"
+                }
+            ],
+            newGoods: [
+                {
+                    price: 198,
+                    buyerCount: 324,
+                    title: "冬季新款牛仔外套加厚连瑁毛领加绒牛仔棉衣"
+                },
+                {
+                    price: 69,
+                    buyerCount: 543,
+                    title: "2015 夏新款韩版透气舒适简约半截袖 T 恤衫"
+                },
+                {
+                    price: 160,
+                    buyerCount: 643,
+                    title: "韩版甜美气质亮片热气球字母中长款圆领短袖 T 恤"
+                },
+                {
+                    price: 210,
+                    buyerCount: 678,
+                    title: "2015 款秋新款甜美学院立领中袖套头格子衬衫娃娃衫"
+                },
+                {
+                    price: 70,
+                    buyerCount: 567,
+                    title: "2015 款秋新款甜美学院立领中袖套头格子衬衫娃娃衫"
+                },
+                {
+                    price: 146,
+                    buyerCount: 4567,
+                    title: "大码女装胖 mm2015 夏装新款韩版显瘦露肩镂空连衣裙"
+                },
+                {
+                    price: 69,
+                    buyerCount: 1345,
+                    title: "大码女装胖 mm2015 夏装新款韩版显瘦露肩镂空连衣裙"
+                }
+            ],
+            firstAdImages: [{}, {}, {}, {}],
+            hotMovies: [
+                {
+                    title: "《刺蝶》火力热播",
+                    text: "侯勇为破案做出新指示"
+                }, {
+                    title: "《终结者 5 》震撼混剪",
+                    text: `呼吁"硬汉精神"的归来`
+                }, {
+                    title: "《刺蝶》火力热播",
+                    text: "侯勇为破案做出新指示"
+                }, {
+                    title: "《终结者 5 》震撼混剪",
+                    text: `呼吁"硬汉精神"的归来`
+                }, {
+                    title: "《刺蝶》火力热播",
+                    text: "侯勇为破案做出新指示"
+                }, {
+                    title: "《终结者 5 》震撼混剪",
+                    text: `呼吁"硬汉精神"的归来`
+                }, {
+                    title: "《刺蝶》火力热播",
+                    text: "侯勇为破案做出新指示"
+                }, {
+                    title: "《终结者 5 》震撼混剪",
+                    text: `呼吁"硬汉精神"的归来`
+                }
+            ],
+            todayFoods: [
+                {
+                    title: "土大力休闲餐",
+                    price: 85,
+                    buyCount: 1875
+                }, {
+                    title: "粥全粥至",
+                    price: 88,
+                    buyCount: 12445
+                }, {
+                    title: "豆腐脑",
+                    price: 9,
+                    buyCount: 41875
+                }, {
+                    title: "土大力休闲餐",
+                    price: 85,
+                    buyCount: 1875
+                }, {
+                    title: "望湘园",
+                    price: 90,
+                    buyCount: 4965
+                }, {
+                    title: "彤德莱",
+                    price: 89,
+                    buyCount: 1875
+                }, {
+                    title: "赛百味",
+                    price: 19.9,
+                    buyCount: 2981
+                }, {
+                    title: "大渔铁板烧(心海广场店)",
+                    price: 180,
+                    buyCount: 451
+                }
+            ],
+        }
     }
 </script>
 </html>

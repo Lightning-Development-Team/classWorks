@@ -1,15 +1,19 @@
-import dataList from "./data.js";
-
 /**
  * nplus-lite是一个小巧的模板解释器
  */
 class NplusLite {
+    pathDot = ""
 
     /**
      * nplus-lite是一个小巧的模板解释器
+     * @param {boolean} useLess 使用Less.js
+     * @param {boolean} useInputExtend 使用表单拓展
+     * @param {boolean} useRouterExtend 使用路由拓展
      */
-    constructor() {
-        this.pathDot = ""
+    constructor(useLess = true, useInputExtend = true, useRouterExtend = true) {
+        this.useLess = useLess
+        this.useInputExtend = useInputExtend
+        this.useRouterExtend = useInputExtend
         window.location.pathname.includes("/pages/") && (this.pathDot = ".")
 
         function $(selector) {
@@ -148,6 +152,10 @@ class NplusLite {
         let markRegExp = /\${(.+?)}/g
         let parentElement = useForElement.parentElement
         let dataListKey = useForElement.getAttribute("for")
+        let dataList = nplusLitePage.data
+        if (!dataList) {
+            console.log("%c页面没有定义data, 它是可选的", "background:#0096ff;color:white;padding:10px");
+        }
         let start = parseInt(useForElement.getAttribute("start") ?? 0)
         let count = parseInt(useForElement.getAttribute("count") ?? 0)
         let addNumber = parseInt(useForElement.getAttribute("addNumber") ?? 0)
@@ -167,29 +175,39 @@ class NplusLite {
             let newElement = this.#createTemporaryElement(useForElement)
             let child = useForElement.$("[child]")
             let childElement = child?.innerHTML
+            try {
+                let isArray = Array.isArray(dataList[dataListKey])
+                for (let i in dataList[dataListKey]) {
+                    let index = parseInt(i)
+                    let data = dataList[dataListKey][i]
+                    if (isArray && (typeof data === "string" || typeof data === "number" || typeof data === "boolean")) {
+                        data = {
+                            item: data
+                        }
+                    }
+                    if (start && index < start) {
+                        continue
+                    }
+                    if (count && (count + start + 1 < index)) {
+                        break
+                    }
+                    // 基本类型
+                    let isString = typeof data === "string"
 
-            for (let i in dataList[dataListKey]) {
-                let index = parseInt(i)
-                let data = dataList[dataListKey][i]
-                if (start && index < start) {
-                    continue
-                }
-                if (count && (count + start + 1 < index)) {
-                    break
-                }
-                // 基本类型
-                let isString = typeof data === "string"
+                    // 无声明index
+                    isString || data.index || (data.index = index + addNumber)
 
-                // 无声明index
-                isString || data.index || (data.index = index + addNumber)
-                newElement.innerHTML = useForElement.outerHTML.replace(markRegExp, htmlString => this.#customReplaceFn(isString, htmlString, data))
-                child && (newElement.$("[child]").innerHTML = childElement)
-                try {
-                    parentElement.appendChild(newElement.firstElementChild)
-                } catch (e) {
-                    console.log(e);
-                    console.log(useForElement);
+                    newElement.innerHTML = useForElement.outerHTML.replace(markRegExp, htmlString => this.#customReplaceFn(isString, htmlString, data))
+                    child && (newElement.$("[child]").innerHTML = childElement)
+                    try {
+                        parentElement.appendChild(newElement.firstElementChild)
+                    } catch (e) {
+                        console.log(e);
+                        console.log(useForElement);
+                    }
                 }
+            } catch (e) {
+                throw SyntaxError("在nplusLitePage.data中没有发现" + dataListKey)
             }
 
             parentElement.removeChild(useForElement)
@@ -235,17 +253,18 @@ class NplusLite {
         //     data: null,
         //     mounted: null
         // }
+        window.nplusLitePage || (window.nplusLitePage = {})
         const pathDot = this.pathDot
         await this.componentsInitialize()
         await this.elementLoopInitialize()
-        nplusLite.createElement("link", {
+        this.useLess && nplusLite.createElement("link", {
             href: pathDot + `./global.less`,
             rel: "stylesheet",
             type: "text/less"
         })
-        nplusLite.createElement("script", {id: "inputExtend", src: pathDot + "./js/inputExtend.js"})
-        nplusLite.createElement("script", {id: "routerExtend", src: pathDot + "./js/routerExtend.js"})
-        nplusLite.createElement("script", {src: pathDot + "./js/less@4.js"})
+        this.useInputExtend && nplusLite.createElement("script", {id: "inputExtend", src: pathDot + "./js/inputExtend.js"})
+        this.useRouterExtend && nplusLite.createElement("script", {id: "routerExtend", src: pathDot + "./js/routerExtend.js"})
+        this.useLess && nplusLite.createElement("script", {src: pathDot + "./js/less@4.js"})
         await this.#waitScriptLoad(["script#inputExtend", "script#routerExtend"])
         this.nplusLitePageInitialize()
         console.log("%cThanks for using nplus-lite!", "background:#0096ff;color:white;padding:10px");
@@ -275,8 +294,6 @@ class NplusLite {
                     return true;
                 },
             });
-        } else {
-            console.log("%c页面没有定义data(), 它是可选的", "background:#0096ff;color:white;padding:10px");
         }
 
         if (nplusLitePage.mounted) {

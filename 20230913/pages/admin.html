@@ -24,10 +24,11 @@
             background-image: url(../images/manageadmin/righttop.gif);
         }
 
-        .inputBar .left .button{
+        .inputBar .left .button {
             background-image: url(../images/manageadmin/buttonbg.png);
         }
-        .inputBar .right .button{
+
+        .inputBar .right .button {
             background-image: url(../images/manageadmin/tbg.png);
         }
     </style>
@@ -118,7 +119,70 @@
 </div>
 </body>
 <script>
-    nplusLitePage={
+    nplusLitePage = {
+        data: {
+            adminTopBarLeftOptions: [
+                {
+                    icon: "globe.png",
+                    title: "网站前台"
+                },
+                {
+                    icon: "home.png",
+                    title: "后台首页"
+                },
+                {
+                    icon: "shop.png",
+                    title: "添加商品"
+                },
+                {
+                    icon: "movie.png",
+                    title: "添加影视"
+                },
+                {
+                    icon: "food.png",
+                    title: "添加餐饮"
+                }
+            ],
+            sideOptions: [
+                {
+                    icon: "leftico01",
+                    title: "购物后台管理",
+                    subOptions: ["添加商品", "商品列表", "商品类型"]
+                }, {
+                    icon: "leftico02",
+                    title: "影视后台管理",
+                    subOptions: []
+                }, {
+                    icon: "leftico05",
+                    title: "餐饮后台管理",
+                    subOptions: []
+                }, {
+                    icon: "leftico04",
+                    title: "订单管理",
+                    subOptions: []
+                }, {
+                    icon: "leftico04",
+                    title: "交易记录",
+                    subOptions: []
+                }, {
+                    icon: "leftico06",
+                    title: "统计报表",
+                    subOptions: []
+                }, {
+                    icon: "leftico04",
+                    title: "权限分配",
+                    subOptions: []
+                }, {
+                    icon: "leftico08",
+                    title: "修改密码",
+                    subOptions: []
+                }, {
+                    icon: "leftico07",
+                    title: "系统设置",
+                    subOptions: []
+                },
+            ]
+        },
         mounted() {
             console.log("mounted");
             let currentSideOptions = $$(".sideOptionBar .item")

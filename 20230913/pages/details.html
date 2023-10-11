@@ -165,7 +165,17 @@
 
     nplusLitePage = {
         data: {
-            productName: null
+            productName: "芒果干118克*6袋",
+            sizes: [
+                {
+                    price: 89.99,
+                    size: "118克*6袋"
+                },
+                {
+                    price: 169.99,
+                    size: "118克*12袋"
+                }
+            ]
         },
         mounted() {
             counter:{
@@ -311,14 +321,12 @@
 
             this.changeProductSizeInitialize()
         },
-
         changeProductSizeInitialize() {
             sizeElements = $$(".sizeBox .selects .select")
             sizeElements[0].classList.add("active")
-            this.data.productName = "芒果干" + sizeElements[0].innerText
+            // this.data.productName = "芒果干" + sizeElements[0].innerText
             // productNameText = nplusLite.bindData({bindName: "productName"})
         },
-
         changeProductSize(element) {
             this.data.productName = "芒果干" + element.innerText
 
